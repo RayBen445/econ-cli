@@ -1,6 +1,6 @@
 {
   "name": "econlab",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Economics CLI toolkit",
   "main": "index.js",
   "bin": {
