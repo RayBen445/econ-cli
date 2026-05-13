@@ -1,13 +1,13 @@
 {
-  "name": "econ-cli",
-  "version": "1.0.0",
+  "name": "econlab",
+  "version": "1.0.1",
   "description": "Economics CLI toolkit",
   "main": "index.js",
   "bin": {
     "econ": "./bin/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node bin/index.js"
   },
   "keywords": [
     "economics",
@@ -15,13 +15,12 @@
     "finance",
     "math"
   ],
-  "author": "",
+  "author": "ProfessorCEO",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "chalk": "^5.6.2",
+    "chalk": "^4.1.2",
     "commander": "^14.0.3",
-    "mathguru": "^1.3.0",
     "ora": "^9.4.0"
   }
 }
