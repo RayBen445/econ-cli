@@ -1,10 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.runInteractiveMode = runInteractiveMode;
-const inquirer_1 = __importDefault(require("inquirer"));
 const calculationService_1 = require("../application/calculationService");
 const resultRenderer_1 = require("../renderers/resultRenderer");
 function parseNumericInput(label, raw) {
@@ -15,7 +11,9 @@ function parseNumericInput(label, raw) {
     return value;
 }
 async function runInteractiveMode(registry, graphEngine) {
-    const { category } = await inquirer_1.default.prompt([
+    const inquirerModule = await import("inquirer");
+    const inquirer = inquirerModule.default;
+    const { category } = await inquirer.prompt([
         {
             type: "list",
             name: "category",
@@ -24,7 +22,7 @@ async function runInteractiveMode(registry, graphEngine) {
         }
     ]);
     const formulas = registry.listByCategory(category);
-    const { formulaId } = await inquirer_1.default.prompt([
+    const { formulaId } = await inquirer.prompt([
         {
             type: "list",
             name: "formulaId",
@@ -39,13 +37,13 @@ async function runInteractiveMode(registry, graphEngine) {
     if (!formula) {
         throw new Error("Formula not found");
     }
-    const inputAnswers = await inquirer_1.default.prompt(formula.arguments.map((arg) => ({
+    const inputAnswers = await inquirer.prompt(formula.arguments.map((arg) => ({
         type: "input",
         name: arg.key,
         message: `${arg.label}: ${arg.description}`
     })));
     const inputs = formula.arguments.map((arg) => parseNumericInput(arg.label, inputAnswers[arg.key]));
-    const options = await inquirer_1.default.prompt([
+    const options = await inquirer.prompt([
         {
             type: "confirm",
             name: "explain",
