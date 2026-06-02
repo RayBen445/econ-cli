@@ -1,25 +1,53 @@
 {
   "name": "econlab",
-  "version": "1.0.2",
-  "description": "Economics CLI toolkit",
-  "main": "dist/cli.js",
+  "version": "2.0.0",
+  "private": true,
+  "description": "EconLab ecosystem-grade developer terminal toolkit. Powered by Kontyra.",
+  "main": "dist/cli/index.js",
+  "types": "dist/types/index.d.ts",
   "bin": {
-    "econ": "./bin/index.js"
+    "econ": "./bin/index.js",
+    "econlab": "./bin/index.js"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "npm run build && node bin/index.js",
-    "test": "npm run build && node --test dist/tests/**/*.test.js"
+    "test": "jest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "release:patch": "npm version patch && npm run changelog",
+    "release:minor": "npm version minor && npm run changelog",
+    "release:major": "npm version major && npm run changelog",
+    "test:watch": "jest --watch",
+    "coverage": "jest --coverage",
+    "doctor": "node ./bin/index.js doctor"
   },
   "keywords": [
     "economics",
     "cli",
     "finance",
-    "math"
+    "math",
+    "developer-tooling",
+    "terminal",
+    "kontyra"
   ],
-  "author": "ProfessorCEO",
-  "license": "ISC",
-  "type": "commonjs",
+  "author": "Kontyra",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RayBen445/econ-cli.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "kontyra": {
+    "poweredBy": "Powered by Kontyra",
+    "aiReady": true,
+    "aiImplemented": false
+  },
   "dependencies": {
     "asciichart": "^1.5.25",
     "blessed": "^0.1.81",
@@ -36,7 +64,7 @@
     "figlet": "^1.11.0",
     "fs-extra": "^11.3.5",
     "gradient-string": "^2.0.2",
-    "inquirer": "^13.4.3",
+    "inquirer": "^9.3.8",
     "katex": "^0.16.45",
     "lodash": "^4.18.1",
     "markdown-it": "^14.1.1",
@@ -44,19 +72,27 @@
     "markdown-pdf": "^11.0.0",
     "mathjax": "^4.1.2",
     "mathjs": "^15.2.0",
-    "ora": "^9.4.0",
+    "ora": "^5.4.1",
     "papaparse": "^5.5.3",
     "pdfkit": "^0.18.0",
     "plotly.js-dist": "^3.5.1",
+    "update-notifier": "^6.0.2",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/blessed": "^0.1.27",
     "@types/figlet": "^1.7.0",
     "@types/gradient-string": "^1.1.6",
+    "@types/jest": "^29.5.12",
     "@types/markdown-it": "^14.1.2",
-    "@types/node": "^25.8.0",
+    "@types/node": "^22.10.1",
     "@types/pdfkit": "^0.17.6",
-    "typescript": "^6.0.3"
+    "conventional-changelog-cli": "^5.0.0",
+    "eslint": "^9.14.0",
+    "eslint-config-prettier": "^9.1.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.3.3",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.6.3"
   }
 }

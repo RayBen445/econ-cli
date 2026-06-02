@@ -1,23 +1,21 @@
 import { Command } from "commander";
+import { FormulaRegistry } from "../formulas";
+import { GraphEngine } from "../graphs/engine";
+import { Exporter } from "../exports/exporter";
 
-import { GraphEngine } from "../core/graph";
-import { FormulaRegistry } from "../core/registry";
-import { runInteractiveMode } from "../interactive/mode";
-import { renderGlobalHelp } from "../renderers/helpRenderer";
-import { registerCategoryCommand } from "./categoryCommand";
+import { registerMicroeconomicsCommands } from "./microeconomics";
+import { registerMacroeconomicsCommands } from "./macroeconomics";
+import { registerFinanceCommands } from "./finance";
+import { registerInteractiveCommand } from "./interactive";
 
-export function registerCommands(program: Command, registry: FormulaRegistry, graphEngine: GraphEngine): void {
-  registerCategoryCommand(program, "microeconomics", registry, graphEngine);
-  registerCategoryCommand(program, "macroeconomics", registry, graphEngine);
-  registerCategoryCommand(program, "finance", registry, graphEngine);
-
-  program
-    .command("interactive")
-    .alias("i")
-    .description("Start guided interactive terminal mode")
-    .action(async () => {
-      await runInteractiveMode(registry, graphEngine);
-    });
-
-  program.addHelpText("after", `\n${renderGlobalHelp(registry)}\n`);
+export function registerCommands(
+  program: Command,
+  registry: FormulaRegistry,
+  graphEngine: GraphEngine,
+  exporter: Exporter
+): void {
+  registerMicroeconomicsCommands(program, registry, graphEngine, exporter);
+  registerMacroeconomicsCommands(program, registry, graphEngine, exporter);
+  registerFinanceCommands(program, registry, graphEngine, exporter);
+  registerInteractiveCommand(program);
 }
